@@ -1,15 +1,15 @@
-import NextAuth from 'next-auth'
-import AppleProvider from 'next-auth/providers/apple'
-import FacebookProvider from 'next-auth/providers/facebook'
+import NextAuth ,{NextAuthOptions}from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-import EmailProvider from 'next-auth/providers/email'
-
-export default NextAuth({
+export const authOptions = {
+  // Configure one or more authentication providers
   providers: [
-    // OAuth authentication providers...
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
-      clientSecret: process.env.GOOGLE_SECRET as string
-    })
-  ]
-})
+      clientSecret: process.env.GOOGLE_SECRET as string,
+    }),
+    // ...add more providers here
+  ],
+}
+
+export default NextAuth(authOptions)
+console.log('Google Client ID:', process.env.GOOGLE_ID);
