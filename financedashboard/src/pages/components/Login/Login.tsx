@@ -1,5 +1,7 @@
-import { Avatar } from "@mui/material"
+import { Avatar, Button } from "@mui/material"
 import { useSession, signIn, signOut } from "next-auth/react"
+import Box from '@mui/material/Box';
+
 
 export default function Component() {
   const { data: session } = useSession()
@@ -8,11 +10,11 @@ export default function Component() {
 
     return <>
       Signed in as {session.user?.email} <br/>
-      <button onClick={() => signOut()}>Sign out</button>
+      <Button color="error" onClick={() => signOut()}>Sign out</Button>
     </>
   }
   return <>
-    Not signed in <br/>
-    <button onClick={() => signIn()}>Sign in</button>
+    Please Login <br/>
+    <Button variant="contained" color="success"  onClick={() => signIn()}>Sign in</Button>
   </>
 }

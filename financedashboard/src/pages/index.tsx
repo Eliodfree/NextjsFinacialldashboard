@@ -1,15 +1,21 @@
+import { useSession, signIn, signOut } from "next-auth/react"
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+// import styles from '@/styles/Home.module.css'
 import Dashboard from './dashboard'
 import Header from '@/pages/components/Headers/Header'
 import Sidemenu from '@/pages/components/sidemenu'
 import Login from './components/Login'
+import { SessionProvider } from "next-auth/react"
+import scss from "./Home.module.scss"
+
 
 const inter = Inter({ subsets: ['latin'] })
 
+
 export default function Home() {
+  const { data: session } = useSession()
   return (
     <>
       <Head>
@@ -18,10 +24,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={scss.main}>
          <Header/>
-         <Sidemenu/>
+         {
+         session && <>
+          <Sidemenu/>
          <Dashboard/>
+         </>
+         }
          <Login/>
       </main>
     </>

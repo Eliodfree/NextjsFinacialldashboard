@@ -138,7 +138,14 @@ function Header() {
               </Button>
             ))}
           </Box>
-
+  {/* description of the email */}
+        <Box sx={{
+           padding:"1rem"
+          }} >
+            <Typography>
+            Signed in as <br/> {session?.user?.email} 
+            </Typography>
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open profile settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -168,6 +175,7 @@ function Header() {
            
             </Menu>
           </Box>
+      
         </Toolbar>
       </Container>
     </AppBar>
