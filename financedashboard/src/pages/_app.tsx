@@ -5,8 +5,8 @@ import { SessionProvider } from "next-auth/react"
 import { CssBaseline } from '@mui/material';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
-import Brightness4Icon from '@mui/material/IconButton';
-import Brightness7Icon from '@mui/material/IconButton';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 interface MyAppProps extends AppProps {
   session: any; // Adjust the type according to your session object structure
@@ -15,11 +15,9 @@ interface MyAppProps extends AppProps {
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: MyAppProps) {
-  const theme = useTheme();
-  const colorMode = React.useContext(ColorModeContext);
+  
   //togoling color mode
-   const ToggleColorMode=()=> {
-    const [mode, setMode] = React.useState<'light' | 'dark'>('light');
+    const [mode, setMode] = React.useState<'light' | 'dark'>('dark');
     //colormode
     const colorMode = React.useMemo(
       () => ({
@@ -39,7 +37,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
         }),
       [mode],
     );
-   }
+   
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>

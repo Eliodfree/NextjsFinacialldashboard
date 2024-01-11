@@ -14,11 +14,17 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import ThemeToggleButton from "../themeToggleButon/themeToggleButton";
+
+export type HeaderProps={
+  ColorModeContext:React.Context<{toggleColorMode:()=>void}>
+}
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Header() {
+function Header(props:HeaderProps) {
+  const {ColorModeContext}=props
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const { data: session } = useSession()
@@ -138,6 +144,9 @@ function Header() {
               </Button>
             ))}
           </Box>
+{/* themetogglebutton */}
+<ThemeToggleButton ColorModeContext={ColorModeContext}/>
+
   {/* description of the email */}
         <Box sx={{
            padding:"1rem"
