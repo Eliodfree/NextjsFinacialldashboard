@@ -15,6 +15,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import ThemeToggleButton from "../themeToggleButon/themeToggleButton";
+import { useMediaQuery } from "@mui/material";
+
+
 
 export type HeaderProps={
   ColorModeContext:React.Context<{toggleColorMode:()=>void}>
@@ -23,8 +26,9 @@ export type HeaderProps={
 const pages = ['Products', 'Pricing', 'Blog'];
 
 function Header(props:HeaderProps) {
-  const {ColorModeContext}=props
 
+   const tabletCheck=useMediaQuery("(min-width:768px)")
+  const {ColorModeContext}=props;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const { data: session } = useSession()
@@ -145,15 +149,17 @@ function Header(props:HeaderProps) {
             ))}
           </Box>
 {/* themetogglebutton */}
-<ThemeToggleButton ColorModeContext={ColorModeContext}/>
+      <ThemeToggleButton ColorModeContext={ColorModeContext}/>
 
   {/* description of the email */}
         <Box sx={{
            padding:"1rem"
           }} >
-            <Typography>
-            Signed in as <br/> {session?.user?.email} 
-            </Typography>
+            {
+              tabletCheck&& (<Typography>
+                Signed in as <br/> {session?.user?.email} 
+                </Typography>)
+            }
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open profile settings">

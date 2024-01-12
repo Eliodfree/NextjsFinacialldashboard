@@ -13,7 +13,6 @@ import scss from "./Home.module.scss"
 
 const inter = Inter({ subsets: ['latin'] })
 
-
 export default function Home() {
   const { data: session } = useSession()
   return (
@@ -25,7 +24,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={scss.main}>
-         <Header/>
+         
          {
          session && <>
           <Sidemenu/>

@@ -4,12 +4,14 @@ import { Theme } from '@mui/material';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-
 import IconButton from '@mui/material/IconButton';
 
+export type ThemeToggleButtonProps={
+  ColorModeContext:React.Context<{toggleColorMode:()=>void}>
+}
 
-const ThemeToggleButton = () => {
-    const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+const ThemeToggleButton = (props:ThemeToggleButtonProps) => {
+    const {ColorModeContext = React.createContext({ toggleColorMode: () => {} })}=props;
     const mobileCheck=useMediaQuery("(min-width:500px)")
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
