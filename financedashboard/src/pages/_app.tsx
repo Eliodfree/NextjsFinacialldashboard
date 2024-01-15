@@ -7,7 +7,8 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import Header from './components/Headers/Header';
+import Header from '@/components/Headers/Header';
+
 
 interface MyAppProps extends AppProps {
   session: any; // Adjust the type according to your session object structure
