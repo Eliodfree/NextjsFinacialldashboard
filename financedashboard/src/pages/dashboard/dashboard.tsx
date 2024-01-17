@@ -5,7 +5,7 @@ import DataRibbon from '@/components/Dashboard/DataRibbon'
 
 const dashboard = () => {
   return (
-    <Box>
+    <Box className={scss.topCardsContainer} >
 
     <DataRibbon/>
     
