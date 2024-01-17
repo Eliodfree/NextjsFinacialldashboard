@@ -16,8 +16,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import scss from "./Sidemenu.module.scss"
 import { useMediaQuery } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
@@ -91,7 +89,7 @@ const sideMenu = () => {
   return (
     <Drawer variant="permanent" open={open} 
     // className="scss.sideMenu"
-    sx={{
+     sx={{
       width: drawerWidth,
     boxSizing: 'border-box',
     ['& .MuiDrawer-paper']:{

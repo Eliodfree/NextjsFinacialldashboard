@@ -6,9 +6,8 @@ import { Inter } from 'next/font/google'
 import Dashboard from './dashboard'
 import { SessionProvider } from "next-auth/react"
 import scss from "./Home.module.scss"
-import Login from "@/components/Login"
 import Sidemenu from "@/components/sidemenu"
-
+import Login from "./auth/Login"
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -19,6 +18,7 @@ export default function Home() {
           {session && <Dashboard/>}
           {session && <Login/>}
        </main>
+       
     </>
   )
 }
