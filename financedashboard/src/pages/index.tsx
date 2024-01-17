@@ -15,23 +15,10 @@ export default function Home() {
   const { data: session } = useSession()
   return (
     <>
-      <Head>
-        <title>Create Next App</title>
-        <meta name="description" content="Financial App" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <main className={scss.main}>
-         
-         {
-         session && <>
-          <Sidemenu/>
-         <Dashboard/>
-         {/* <Login/> */}
-         </>
-         }
-         <Login/>
-      </main>
+          {session && <Dashboard/>}
+          {session && <Login/>}
+       </main>
     </>
   )
 }

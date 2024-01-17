@@ -18,9 +18,28 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import scss from "./Sidemenu.module.scss"
+import { useMediaQuery } from '@mui/material';
+import Drawer from '@mui/material/Drawer';
+import HomeIcon from '@mui/icons-material/Home';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import PersonIcon from '@mui/icons-material/Person';
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
+
+
+const menuRouteList=["data","profile","settings",""]
+const menuListTranslations=["Data","Profile","Settings"]
+const menuListIcon=[
+<HomeIcon/>,
+<PersonIcon/>,
+<ManageAccountsIcon/>,
+<ExitToAppIcon/>,
+
+]
 
 const drawerWidth = 240;
-
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -50,17 +69,87 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
-
 const sideMenu = () => {
-  return (
-    <div>
-        <ul>
-            <li>Analytics</li>
-            <li>settings</li>
-            <li>profile</li>
 
-        </ul>
-    </div>
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+  const mobileCheck=useMediaQuery("(min-width:600px)");
+
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
+
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
+
+  const handleListItemButtonClick=(text:string)=>{
+    text=="Sign Out" ?signOut:setOpen(false);
+    setOpen(false);
+  }
+
+  return (
+    <Drawer variant="permanent" open={open} 
+    // className="scss.sideMenu"
+    sx={{
+      width: drawerWidth,
+    boxSizing: 'border-box',
+    ['& .MuiDrawer-paper']:{
+      top:mobileCheck ? 78:57,
+      flexShrink: 0,
+      whiteSpace: 'nowrap',
+      ...(open && {
+        ...openedMixin(theme),
+        '& .MuiDrawer-paper': openedMixin(theme),
+      }),
+      ...(!open && {
+        ...closedMixin(theme),
+        '& .MuiDrawer-paper': closedMixin(theme),
+      }),
+    },
+   
+    
+    }}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerToggle}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          {menuListTranslations.map((text, index) => (
+            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+              {/* linking nextjs pages */}
+             <Link className={scss.link} href={`/dashboard/${menuRouteList[index]}`}>
+             <ListItemButton
+               onClick={()=>handleListItemButtonClick(text)}
+                title={text}
+                aria-label={text}
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {menuListIcon[index]}
+                </ListItemIcon>
+                <ListItemText primary={text} sx={{ 
+                  color:theme.palette.text.primary,
+                  opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+             </Link>
+           
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
   )
 }
 

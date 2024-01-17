@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Header from '@/components/Headers/Header';
+import Layout from '@/components/Layout/Layout';
 
 
 interface MyAppProps extends AppProps {
@@ -63,7 +64,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       </IconButton>
     </Box> */}
    <Header ColorModeContext={ColorModeContext}/>
-      <Component {...pageProps} />
+   
+   <Layout>
+     <Component {...pageProps} />
+   </Layout>
     </SessionProvider>
     </ThemeProvider>
     </ColorModeContext.Provider>
